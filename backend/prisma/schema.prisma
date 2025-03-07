@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  password          String
+  firstName         String?
+  lastName          String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  role              Role              @default(USER)
+  isEmailVerified   Boolean           @default(false)
+  userCreditCards   UserCreditCard[]
+  
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// Bank model
+model Bank {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  logo        String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  creditCards CreditCard[]
+  
+  @@map("banks")
+}
+
+// Credit Card model
+model CreditCard {
+  id                String            @id @default(uuid())
+  name              String
+  bankId            String
+  bank              Bank              @relation(fields: [bankId], references: [id], onDelete: Cascade)
+  image             String?
+  annualFee         Float             @default(0)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  userCreditCards   UserCreditCard[]
+  rewardRules       RewardRule[]
+  
+  @@unique([bankId, name])
+  @@map("credit_cards")
+}
+
+// User Credit Card model (junction table)
+model UserCreditCard {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creditCardId  String
+  creditCard    CreditCard  @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  cardNumber    String?     // Last 4 digits only for reference
+  expiryDate    DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  @@unique([userId, creditCardId])
+  @@map("user_credit_cards")
+}
+
+// Transaction Category model
+model TransactionCategory {
+  id              String                @id @default(uuid())
+  name            String                @unique
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  subCategories   TransactionSubCategory[]
+  rewardRules     RewardRule[]
+  
+  @@map("transaction_categories")
+}
+
+// Transaction Sub-Category model
+model TransactionSubCategory {
+  id              String              @id @default(uuid())
+  name            String              
+  categoryId      String
+  category        TransactionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  rewardRules     RewardRule[]
+  
+  @@unique([categoryId, name])
+  @@map("transaction_sub_categories")
+}
+
+// Reward Rule model
+model RewardRule {
+  id                    String                  @id @default(uuid())
+  creditCardId          String
+  creditCard            CreditCard              @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  categoryId            String
+  category              TransactionCategory     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  subCategoryId         String?
+  subCategory           TransactionSubCategory? @relation(fields: [subCategoryId], references: [id])
+  transactionType       TransactionType         @default(BOTH)
+  rewardType            RewardType
+  rewardValue           Float                   // Percentage for cashback, points per dollar for points
+  monthlyCap            Float?                  // Maximum reward amount per month (if applicable)
+  minimumSpend          Float?                  // Minimum spend required to qualify for reward
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  
+  @@unique([creditCardId, categoryId, subCategoryId, transactionType])
+  @@map("reward_rules")
+}
+
+enum RewardType {
+  CASHBACK
+  POINTS
+  MILES
+}
+
+enum TransactionType {
+  ONLINE
+  OFFLINE
+  BOTH
+}
+
+
+enum TransactionType {
+  ONLINE
+  OFFLINE
+  BOTH
+}
