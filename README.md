@@ -118,7 +118,7 @@ git clone [repository-url]
 
 2. Install dependencies
 ```bash
-cd frontend
+cd frontend and cd backend
 npm install
 ```
 
@@ -127,18 +127,36 @@ npm install
 cp .env.example .env.local
 ```
 
-4. Run the development server
+4. Run the frontend
 ```bash
 npm run dev
+```
+Run the backend
+```bash
+npm run start:dev   
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Environment Variables
 
-Create a `.env.local` file in the frontend directory with the following variables:
+Create a `.env` file in the frontend directory with the following variables:
 ```
 NEXT_PUBLIC_API_URL=your_api_url
+```
+Create a `.env.` file in the backend directory with the following variables:
+```
+DATABASE_URL=
+```
+# JWT Authentication
+```
+JWT_SECRET="your-super-secret-jwt-key-change-in-production"
+JWT_EXPIRATION="1d"
+```
+# Server Configuration
+```
+PORT=3001
+NODE_ENV="development"
 ```
 
 ## Contributing
