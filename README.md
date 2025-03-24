@@ -5,6 +5,7 @@ A comprehensive platform to help users maximize their credit card rewards and ma
 ## Features
 
 ### 1. Dashboard
+![dashboard snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141647.png)
 - **Overview**: Quick snapshot of all your credit cards and total rewards
 - **Reward Summary**:
   - Total cashback earned
@@ -14,18 +15,21 @@ A comprehensive platform to help users maximize their credit card rewards and ma
 - **Dark/Light Mode**: Toggle between dark and light themes for comfortable viewing
 
 ### 2. Credit Card Management
+![credit card snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141701.png)
 - **Card Portfolio**:
   - Add multiple credit cards to your profile
   - View all your cards in an organized grid layout
   - Secure storage of card details (only last 4 digits visible)
   - Track expiry dates
 - **Card Details**:
+![card details snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141718.png)
   - Bank information
   - Card type
   - Reward balances
   - Card-specific reward rules
 
 ### 3. Reward Calculator
+![reward calculator snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141730.png)
 - **Smart Calculation**:
   - Input transaction amount and category
   - Get instant reward calculations for all your cards
@@ -40,6 +44,7 @@ A comprehensive platform to help users maximize their credit card rewards and ma
   - Monthly caps and minimum spend requirements
 
 ### 4. Card Comparison
+![card comparision snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141742.png)
 - **Side-by-Side Comparison**:
   - Compare up to 3 cards simultaneously
   - Easy-to-read comparison table
@@ -76,6 +81,15 @@ A comprehensive platform to help users maximize their credit card rewards and ma
   - Percentage-based rewards
   - Points multipliers
   - Mile accumulation rates
+    
+## Admin Demo Screenshots
+![card snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141817.png)
+
+![bank snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141827.png)
+
+![category snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141853.png)
+
+![reward rules snap](https://github.com/PranayHaldiya/Maximize-CCreward/blob/main/frontend/public/Screenshot%202025-03-19%20141908.png)
 
 ## Technical Features
 
